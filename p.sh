@@ -20,6 +20,8 @@ select yn in "Yes" "No"; do
               wget https://apt.llvm.org/llvm.sh
               chmod +x llvm.sh
               sudo ./llvm.sh 21 
+              rm -rf llvm.sh
+              echo "All packages needed for build purekernel is installed."
               exit;;
         No ) exit;;
     esac

@@ -57,9 +57,9 @@ export ARCH=arm64
 
 # Каталог для сборки PureKernel
 if [ "$DEVICE" = "munch" ]; then
-    PURE_KERNEL_DIR="$KERNEL_DIR/pk"
+    PURE_KERNEL_DIR="$KERNEL_DIR/pkdir"
 else
-    PURE_KERNEL_DIR="$KERNEL_DIR/pk"
+    PURE_KERNEL_DIR="$KERNEL_DIR/pkdir"
 fi
 
 # Создание каталога PureKernel, если его нет

@@ -12,6 +12,9 @@ rm -rf out
 # Основной каталог
 MAINPATH=/workspaces # измените, если необходимо
 
+rm -rf KernelSU-Next
+git clone -b next-susfs https://github.com/KernelSU-Next/KernelSU-Next.git
+
 # Каталог ядра
 KERNEL_DIR=$MAINPATH
 KERNEL_PATH=$KERNEL_DIR/pk
@@ -20,7 +23,7 @@ git log $LAST..HEAD > ../changelog.txt
 BRANCH=$(git branch --show-current)
 
 # Каталоги компиляторов
-CLANG_DIR=$KERNEL_PATH/c
+CLANG_DIR=/lib/llvm-21
 ANDROID_PREBUILTS_GCC_ARM_DIR=$KERNEL_DIR/android_prebuilts_gcc_linux-x86_arm_arm-linux-androideabi-4.9
 ANDROID_PREBUILTS_GCC_AARCH64_DIR=$KERNEL_DIR/android_prebuilts_gcc_linux-x86_aarch64_aarch64-linux-android-4.9
 
@@ -139,19 +142,8 @@ if grep -q -E "Ошибка 2|Error 2" build.log; then
     cd "$KERNEL_PATH"
     echo "Ошибка: Сборка завершилась с ошибкой"
 
-    curl -s -X POST https://api.telegram.org/bot$TGTOKEN/sendMessage \
-    -d chat_id="@Ximipurekernel" \
-    -d text="Build ended with error!" \
-    -d message_thread_id="2"
-
-    curl -s -X POST "https://api.telegram.org/bot$TGTOKEN/sendDocument?chat_id=@Ximipurekernel" \
-    -F document=@"./build.log" \
-    -F message_thread_id="2"
-
-    curl -s -X POST "https://api.telegram.org/bot$TGTOKEN/sendDocument?chat_id=@Ximipurekernel" \
-    -F document=@"../changelog.txt" \
-    -F message_thread_id="2"
 else
+
     echo "Total compiling time: $elapsed_time second"
     # Перемещение в каталог MagicTime и создание архива
     cd "$MAGIC_TIME_DIR"

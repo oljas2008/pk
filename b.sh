@@ -20,7 +20,7 @@ git log $LAST..HEAD > ../changelog.txt
 BRANCH=$(git branch --show-current)
 
 # Каталоги компиляторов
-CLANG_DIR=/lib/llvm-21
+CLANG_DIR=$KERNEL_PATH/c
 ANDROID_PREBUILTS_GCC_ARM_DIR=$KERNEL_DIR/android_prebuilts_gcc_linux-x86_arm_arm-linux-androideabi-4.9
 ANDROID_PREBUILTS_GCC_AARCH64_DIR=$KERNEL_DIR/android_prebuilts_gcc_linux-x86_aarch64_aarch64-linux-android-4.9
 
@@ -164,7 +164,7 @@ else
 
     curl -s -X POST "https://api.telegram.org/bot$TGTOKEN/sendDocument?chat_id=@Ximipurekernel" \
     -F document=@"./PureLine-munch-$MAGIC_BUILD_DATE.zip" \
-    -F caption="PureLine (Just testing) branch: ${BRANCH}" \
+    -F caption="PureLine (Just testing aosp clang) branch: ${BRANCH}" \
     -F message_thread_id="2"
    
 BUILD=$((BUILD + 1))

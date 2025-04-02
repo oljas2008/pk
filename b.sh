@@ -156,8 +156,13 @@ else
 
     curl -s -X POST "https://api.telegram.org/bot$TGTOKEN/sendDocument?chat_id=@Ximipurekernel" \
     -F document=@"./PureLine-munch-$MAGIC_BUILD_DATE.zip" \
-    -F caption="PureLine (Just testing aosp clang) branch: ${BRANCH}" \
+    -F caption="PureLine (Just testing) branch: ${BRANCH}" \
     -F message_thread_id="2"
+
+    curl -s -X POST "https://api.telegram.org/bot$TGTOKEN/sendDocument?chat_id=@Ximipurekernel" \
+        -F document=@"../changelog.txt" \
+            -F caption="Latest changes" \
+                -F message_thread_id="2"
    
 BUILD=$((BUILD + 1))
 

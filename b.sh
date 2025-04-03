@@ -12,6 +12,7 @@ rm -rf out
 # Основной каталог
 MAINPATH=/workspaces # измените, если необходимо
 
+# Ksu Next updater
 rm -rf KernelSU-Next
 git clone -b next-susfs https://github.com/KernelSU-Next/KernelSU-Next.git
 
@@ -23,7 +24,7 @@ git log $LAST..HEAD > ../changelog.txt
 BRANCH=$(git branch --show-current)
 
 # Каталоги компиляторов
-CLANG_DIR=$KERNEL_PATH/clang
+CLANG_DIR=$KERNEL_DIR/clang21
 ANDROID_PREBUILTS_GCC_ARM_DIR=$KERNEL_DIR/android_prebuilts_gcc_linux-x86_arm_arm-linux-androideabi-4.9
 ANDROID_PREBUILTS_GCC_AARCH64_DIR=$KERNEL_DIR/android_prebuilts_gcc_linux-x86_aarch64_aarch64-linux-android-4.9
 
@@ -54,6 +55,7 @@ check_and_wget() {
 }
 
 # Клонирование инструментов компиляции, если они не существуют
+check_and_wget $CLANG_DIR https://github.com/ZyCromerZ/Clang/releases/download/21.0.0git-20250322-release/Clang-21.0.0git-20250322.tar.gz
 check_and_clone $ANDROID_PREBUILTS_GCC_ARM_DIR https://github.com/LineageOS/android_prebuilts_gcc_linux-x86_arm_arm-linux-androideabi-4.9
 check_and_clone $ANDROID_PREBUILTS_GCC_AARCH64_DIR https://github.com/LineageOS/android_prebuilts_gcc_linux-x86_aarch64_aarch64-linux-android-4.9
 
@@ -160,9 +162,9 @@ else
     -F message_thread_id="2"
 
     curl -s -X POST "https://api.telegram.org/bot$TGTOKEN/sendDocument?chat_id=@Ximipurekernel" \
-        -F document=@"../changelog.txt" \
-            -F caption="Latest changes" \
-                -F message_thread_id="2"
+    -F document=@"../changelog.txt" \
+    -F caption="Latest changes" \
+    -F message_thread_id="2"
    
 BUILD=$((BUILD + 1))
 

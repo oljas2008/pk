@@ -50,7 +50,7 @@ check_and_wget() {
         wget $repo
         tar -zxvf Clang-21.0.0git-20250322.tar.gz
         rm -rf Clang-21.0.0git-20250322.tar.gz
-        cd ../kernel_xiaomi_sm8250
+        cd ../pk
     fi
 }
 
@@ -158,7 +158,7 @@ else
 
     curl -s -X POST "https://api.telegram.org/bot$TGTOKEN/sendDocument?chat_id=@Ximipurekernel" \
     -F document=@"./PureLine-munch-$MAGIC_BUILD_DATE.zip" \
-    -F caption="PureLine (Just testing greenforce clang) branch: ${BRANCH}" \
+    -F caption="PureLine (Just testing zyc clang) branch: ${BRANCH}" \
     -F message_thread_id="2"
 
     curl -s -X POST "https://api.telegram.org/bot$TGTOKEN/sendDocument?chat_id=@Ximipurekernel" \
